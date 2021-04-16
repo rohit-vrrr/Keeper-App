@@ -6,16 +6,22 @@ import CreateArea from "./CreateArea";
 
 function App() {
 
-    function addNote(note) {
-        console.log(note);
+    const [notes, setNotes] = React.useState([]);
+
+    function addNote(newNote) {
+        setNotes((prevNotes) => {
+            return [...prevNotes, newNote];
+        });
     }
     
     return(
         <div>
             <Header />
             <CreateArea onAdd={addNote}/>
-
-            <Note key={1} title="Note title" content="Note content" />
+            
+            {notes.map((eachNote) => {
+                return <Note title={eachNote.title} content={eachNote.content} />
+            })}
 
             <Footer />
         </div>
